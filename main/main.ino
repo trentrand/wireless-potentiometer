@@ -5,15 +5,17 @@
 #include <arduino.h>
 #include "MCP41100.h"
 #include "AnalogPot.h"
+#include "InfaredReceiver.h"
 
 const int DIGITAL_POT_PIN = 10;
 const int ANALOG_PIN = 5;
-const int RECV_PIN = 3;
+const int RECEIVER_PIN = 3;
 
 int volume = 0;
 
 MCP41100 digitalPot(DIGITAL_POT_PIN);
 AnalogPot analogPot(ANALOG_PIN);
+InfaredReceiver irReceiver(RECEIVER_PIN);
 
 void setup() {
   Serial.begin(9600);
