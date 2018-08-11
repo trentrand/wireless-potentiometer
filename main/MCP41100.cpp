@@ -14,14 +14,13 @@
 */
 
 #include "MCP41100.h"
-#include "SPI.h";
+#include "SPI.h"
 
 byte address = 0x11;
 int CS_PIN = 10; // LOW = receive commands from SI_PIN
 int POT_PIN = 5; // input pin for the potentiometer
 
-MCP41100::MCP41100(int pin = CS_PIN)
-{
+MCP41100::MCP41100(int pin = CS_PIN) {
   pinMode(pin, OUTPUT); // set the SPI CS pin as output
   _pin = pin;
   

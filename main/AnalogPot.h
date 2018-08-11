@@ -4,10 +4,7 @@
 #ifndef AnalogPot_h
 #define AnalogPot_h
 
-#include "Arduino.h"
-
-class AnalogPot
-{
+class AnalogPot {
   public:
     AnalogPot(int pin);
     char read();

@@ -8,11 +8,10 @@
   ————————————————————
 */
 
-#include "Arduino.h"
+#include "arduino.h"
 #include "AnalogPot.h"
 
-AnalogPot::AnalogPot(int pin)
-{
+AnalogPot::AnalogPot(int pin) {
   pinMode(pin, OUTPUT); // input pin for the potentiometer
   _pin = pin; 
 }

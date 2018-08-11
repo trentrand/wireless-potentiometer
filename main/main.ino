@@ -2,11 +2,10 @@
   Main controller for wireless potentiometer gardget.
 */
 
-#include <Arduino.h>
-#include "MCP41100.h";
-#include "AnalogPot.h";
+#include <arduino.h>
+#include "MCP41100.h"
+#include "AnalogPot.h"
 
-byte address = 0x11;
 int volume = 0;
 
 MCP41100 digitalPot(10); // LOW = receive commands from SI_PIN
