@@ -6,10 +6,14 @@
 #include "MCP41100.h"
 #include "AnalogPot.h"
 
+const int DIGITAL_POT_PIN = 10;
+const int ANALOG_PIN = 5;
+const int RECV_PIN = 3;
+
 int volume = 0;
 
-MCP41100 digitalPot(10); // LOW = receive commands from SI_PIN
-AnalogPot analogPot(5);  // input pin for the potentiometer
+MCP41100 digitalPot(DIGITAL_POT_PIN);
+AnalogPot analogPot(ANALOG_PIN);
 
 void setup() {
   Serial.begin(9600);
