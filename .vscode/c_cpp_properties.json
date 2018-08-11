@@ -3,18 +3,29 @@
         {
             "name": "Mac",
             "includePath": [
-                "/Users/trand/Library/Arduino15/packages/arduino/tools/**",
-                "/Users/trand/Library/Arduino15/packages/arduino/hardware/avr/1.6.21/**"
+                "/Applications/Arduino.app/Contents/Java/libraries",
+                "/Users/trand/Documents/Arduino/libraries",
+                "/Users/trand/Documents/Arduino/libraries/IRremote",
+                "${workspaceRoot}/libs"
             ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": false,
+                "path": [
+                    "/Applications/Arduino.app/Contents/Java/libraries",
+                    "/Users/trand/Documents/Arduino/libraries",
+                    "${workspaceRoot}"
+                ]
+            },
+            "intelliSenseMode": "clang-x64",
             "macFrameworkPath": [
                 "/System/Library/Frameworks",
                 "/Library/Frameworks"
             ],
-            "intelliSenseMode": "clang-x64",
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c11",
             "cppStandard": "c++17"
         }
     ],
-    "version": 4
+    "version": 4,
+    "intelliSenseMode": "clang-x64"
 }
