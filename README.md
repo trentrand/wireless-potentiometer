@@ -10,12 +10,18 @@ Create this gadget to add wireless IR manipulation of a 100k ohm analog potentio
 
 ### Software
 
-* InfaredReceiver.ino needs to be rewritten as a C++ class
+* InfaredReceiver.ino needs the following:
   * utility to read next input, use it to pair remote
   * store pairing in non volatile memory, persist boot
   * callback pattern for IR communication?
 
 * Utilize InfaredReceiver in main
+
+* Status indicator leds?
+  * When the device needs a pairing, blink orange with triple pattern
+    * wait for up, then confirm, then down, then confirm
+    * button to reset pairing? see if bean has room...
+  * When the device receives a command, blink green
 
 * Setup final behavior
   * AnalogPot overrides InfaredReceiver wiper value
