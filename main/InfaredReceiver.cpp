@@ -12,14 +12,16 @@
 
 InfaredReceiver::InfaredReceiver(int pin) {
   _pin = pin;
+
   receiver = new IRrecv(_pin);
   receiver->enableIRIn();
 }
 
-char InfaredReceiver::read() {
-  if (receiver->decode(&(this->results))) {
+Command InfaredReceiver::read() {
+  if (receiver->decode(&results)) {
     receiver->resume(); // Receive the next value
     return results.value;
   }
+
   delay(100);
 }
