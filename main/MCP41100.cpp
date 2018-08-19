@@ -13,28 +13,27 @@
   ————————————————————
 */
 
+#include "arduino.h"
 #include "MCP41100.h"
 #include "SPI.h"
 
 byte address = 0x11;
 int CS_PIN = 10; // LOW = receive commands from SI_PIN
-int POT_PIN = 5; // input pin for the potentiometer
 
-MCP41100::MCP41100(int pin = CS_PIN) {
+MCP41100::MCP41100(int pin) {
   pinMode(pin, OUTPUT); // set the SPI CS pin as output
   _pin = pin;
-  
+
   SPI.begin();
 
   adjustResistance(0x00); // adjust max resistance
   adjustResistance(0x80); // adjust wiper to midpoint
   adjustResistance(0xFF); // adjust min resistance
-  
 }
 
 void MCP41100::adjustResistance(char analogValue) {
   write(analogValue);
-  delay(1000);
+  delay(100);
 }
 
 void MCP41100::write(char value) {
