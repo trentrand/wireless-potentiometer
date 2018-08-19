@@ -13,9 +13,10 @@
 
 AnalogPot::AnalogPot(int pin) {
   pinMode(pin, OUTPUT); // input pin for the potentiometer
-  _pin = pin; 
+  _pin = pin;
 }
 
-char AnalogPot::read() {
+int AnalogPot::read() {
   return analogRead(_pin);
 }
+

@@ -7,9 +7,10 @@
 class AnalogPot {
   public:
     AnalogPot(int pin);
-    char read();
+    int read();
   private:
     int _pin;
 };
 
 #endif
+
