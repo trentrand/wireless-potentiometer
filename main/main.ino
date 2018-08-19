@@ -1,5 +1,5 @@
 /*
-  Main controller for wireless potentiometer gardget.
+  Main controller for wireless potentiometer gadget.
 */
 
 #include <arduino.h>
