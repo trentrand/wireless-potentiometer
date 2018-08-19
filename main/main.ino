@@ -23,6 +23,8 @@ void setup() {
   analogPot = new AnalogPot(ANALOG_PIN);
   infaredReceiver = new InfaredReceiver(RECEIVER_PIN);
   digitalPot = new MCP41100(DIGITAL_POT_PIN);
+
+  volume = analogPot->read();
 }
 
 void loop() {
