@@ -17,8 +17,8 @@ class InfaredReceiver {
     InfaredReceiver(int pin);
     Command read();
     Command registerCommand(byte command);
-    static int comparator(const void *cmp1, const void *cmp2);
     Command getMostFrequentCommand(Command commands[]);
+    static int compare(const void * a, const void * b);
   private:
     int _pin;
     decode_results results;

@@ -45,10 +45,8 @@ Command InfaredReceiver::registerCommand(byte command) {
   return getMostFrequentCommand(commandsReceived);
 }
 
-static int InfaredReceiver::comparator(const void *cmp1, const void *cmp2) {
-  Command a = *((Command *)cmp1);
-  Command b = *((Command *)cmp2);
-  return b - a;
+int InfaredReceiver::compare(const void * a, const void * b) {
+  return (*(Command*)a - *(Command*)b);
 }
 
 Command InfaredReceiver::getMostFrequentCommand(Command commands[]) {
@@ -58,7 +56,7 @@ Command InfaredReceiver::getMostFrequentCommand(Command commands[]) {
   Command mostFrequentCommand;
   byte maxCount;
 
-  qsort(commands, COMMANDS_TO_CONFIRM, sizeof(commands[0]), comparator);
+  qsort(commands, COMMANDS_TO_CONFIRM, sizeof(commands[0]), compare);
 
 
   for (byte i = 1; i < COMMANDS_TO_CONFIRM; i++) {
