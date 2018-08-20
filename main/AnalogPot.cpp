@@ -12,7 +12,7 @@
 #include "AnalogPot.h"
 
 AnalogPot::AnalogPot(int pin) {
-  pinMode(pin, OUTPUT); // input pin for the potentiometer
+  pinMode(pin, INPUT); // input pin for the potentiometer
   _pin = pin;
 }
 
