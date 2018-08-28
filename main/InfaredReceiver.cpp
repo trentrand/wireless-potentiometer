@@ -33,7 +33,7 @@ Command InfaredReceiver::registerCommand(byte command) {
   for (byte count = 0; count < COMMANDS_TO_CONFIRM;) {
     Command command = read();
 
-    if (command != REPEAT && command != -1) {
+    if (command != REPEAT && command != -1 && command != 4294967295) {
       Serial.print("Received potential command: ");
       Serial.println(command, DEC);
 
