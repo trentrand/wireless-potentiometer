@@ -11,6 +11,7 @@
 const int DIGITAL_POT_PIN = 10;
 const int ANALOG_PIN = 5;
 const int RECEIVER_PIN = 3;
+const int LED_PIN= 5;
 
 struct Config {
   Command volumeUpCode;
@@ -31,6 +32,9 @@ void setup() {
   Serial.begin(9600);
 
   analogPot = new AnalogPot(ANALOG_PIN);
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, HIGH);
+
   infaredReceiver = new InfaredReceiver(RECEIVER_PIN);
   digitalPot = new MCP41100(DIGITAL_POT_PIN);
 
@@ -83,3 +87,8 @@ void printConfiguration() {
 
 }
 
+void blink(int pin) {
+  digitalWrite(pin, LOW);
+  delay(100);
+  digitalWrite(pin, HIGH);
+}
