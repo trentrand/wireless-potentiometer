@@ -9,6 +9,7 @@
 #include "InfaredReceiver.h"
 
 #define ANALOG_THRESHOLD 51
+#define STEP_MODIFIER 20
 const int DIGITAL_POT_PIN = 10;
 const int ANALOG_POT_PIN = A5;
 const int RECEIVER_PIN = 3;
@@ -69,9 +70,30 @@ void loop() {
     prevAnalogVolume = analogVolume;
   } 
   
+  const int modifier = getModifierFromCommand();
+  
+  // Check if Digital should take precedence over analog
+  if (modifier != 0) {
+    useDigital = true;
+    Serial.println("Master: DIGITAL");
+    changeDigitalVolume(modifier);
+  }
+  
   delay(50);
   Serial.println(volume);
   digitalPot->write(map(volume, 0, 1024, 0, 255));
+}
+
+int changeDigitalVolume(int alpha) {
+  const int newVolume = volume + (alpha * STEP_MODIFIER);
+
+  if (newVolume >= 1023) {
+    volume = 1023;
+  } else if (newVolume <= 0) {
+    volume = 0;
+  } else {
+    volume = newVolume;
+  }
 }
 
 void pair() {
@@ -99,6 +121,22 @@ void printConfiguration() {
   Serial.print("Volume down: \t");
   Serial.println(config.volumeDownCode);
   Serial.println("\n------------------------\n");
+}
+
+int getModifierFromCommand() {
+  const Command results = infaredReceiver->read();
+
+  if (results == config.volumeUpCode) {
+    blink(LED_PIN);
+    return VOLUME_UP;
+  }
+
+  if (results == config.volumeDownCode) {
+    blink(LED_PIN);
+    return VOLUME_DOWN;
+  }
+
+  return 0;
 }
 
 boolean isAlphaSignificant(int value, int prevValue) {
