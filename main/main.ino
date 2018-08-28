@@ -79,8 +79,9 @@ void loop() {
     changeDigitalVolume(modifier);
   }
   
+  // printVolume();
+
   delay(50);
-  Serial.println(volume);
   digitalPot->write(map(volume, 0, 1024, 0, 255));
 }
 
@@ -121,6 +122,13 @@ void printConfiguration() {
   Serial.print("Volume down: \t");
   Serial.println(config.volumeDownCode);
   Serial.println("\n------------------------\n");
+}
+
+void printVolume() {
+  Serial.print("Volume (analog / digital): ");
+  Serial.print(volume);
+  Serial.print(" / ");
+  Serial.println(map(volume, 0, 1024, 0, 255));
 }
 
 int getModifierFromCommand() {
