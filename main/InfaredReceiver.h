@@ -4,11 +4,11 @@
 #ifndef InfaredReceiver_h
 #define InfaredReceiver_h
 
-typedef long unsigned int Command; 
+typedef unsigned long Command; 
 
 #include "IRremote.h"
 
-#define COMMANDS_TO_CONFIRM 3
+#define COMMANDS_TO_CONFIRM 10
 
 class IRRecv;
 

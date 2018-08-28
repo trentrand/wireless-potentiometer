@@ -36,6 +36,7 @@ Command InfaredReceiver::registerCommand(byte command) {
     if (command != REPEAT && command != -1 && command != 4294967295) {
       Serial.print("Received potential command: ");
       Serial.println(command, DEC);
+      // TODO: blink
 
       commandsReceived[count] = command;
       count++;
@@ -50,14 +51,13 @@ int InfaredReceiver::compare(const void * a, const void * b) {
 }
 
 Command InfaredReceiver::getMostFrequentCommand(Command commands[]) {
-  Command prevCommand = commands[0]; // 0
-  byte currentCount = 1; // c1 c2
+  Command prevCommand = commands[0];
+  byte currentCount = 1;
 
-  Command mostFrequentCommand;
-  byte maxCount;
+  Command mostFrequentCommand = prevCommand;
+  byte maxCount = 0;
 
   qsort(commands, COMMANDS_TO_CONFIRM, sizeof(commands[0]), compare);
-
 
   for (byte i = 1; i < COMMANDS_TO_CONFIRM; i++) {
     if (commands[i] == prevCommand) {
@@ -73,6 +73,7 @@ Command InfaredReceiver::getMostFrequentCommand(Command commands[]) {
     }
   }
 
+  // TODO: blink 3 times rapidly
   return mostFrequentCommand;
 }
 
