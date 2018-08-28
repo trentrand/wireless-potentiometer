@@ -11,11 +11,7 @@ Create this gadget to add wireless IR manipulation of a 100k ohm analog potentio
 ### Software
 
 * InfaredReceiver.ino needs the following:
-  * utility to read next input, use it to pair remote
-  * store pairing in non volatile memory, persist boot
-  * callback pattern for IR communication?
-
-* Utilize InfaredReceiver in main
+  * store last command and relay it when #FFFFFFFF repeat command is received
 
 * Status indicator leds?
   * When the device needs a pairing, blink orange with triple pattern
@@ -23,11 +19,7 @@ Create this gadget to add wireless IR manipulation of a 100k ohm analog potentio
     * button to reset pairing? see if bean has room...
   * When the device receives a command, blink green
 
-* Setup final behavior
-  * AnalogPot overrides InfaredReceiver wiper value
-  * Infared communication increments / decrements wiper value
-
-* Make sure everythings documented
+* Make sure everything is documented
 
 ### Hardware
 
@@ -44,5 +36,3 @@ Create this gadget to add wireless IR manipulation of a 100k ohm analog potentio
 * Create installation document
 
 * Enclose circuit in speaker housing
-
-* Design PCB
