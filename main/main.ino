@@ -8,8 +8,9 @@
 #include "AnalogPot.h"
 #include "InfaredReceiver.h"
 
+#define ANALOG_THRESHOLD 51
 const int DIGITAL_POT_PIN = 10;
-const int ANALOG_PIN = 5;
+const int ANALOG_POT_PIN = A5;
 const int RECEIVER_PIN = 3;
 const int LED_PIN= 5;
 
@@ -21,6 +22,9 @@ struct Config {
 const int VOLUME_UP = 1;
 const int VOLUME_DOWN = -1;
 
+boolean useDigital = false;
+int prevAnalogVolume = 0;
+int analogVolume = 0;
 
 int volume = 0;
 
@@ -31,10 +35,10 @@ MCP41100* digitalPot;
 void setup() {
   Serial.begin(9600);
 
-  analogPot = new AnalogPot(ANALOG_PIN);
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, HIGH);
 
+  analogPot = new AnalogPot(ANALOG_POT_PIN);
   infaredReceiver = new InfaredReceiver(RECEIVER_PIN);
   digitalPot = new MCP41100(DIGITAL_POT_PIN);
 
@@ -52,7 +56,19 @@ void setup() {
 }
 
 void loop() {
-  volume = analogPot->read();
+  analogVolume = analogPot->read();
+  
+  // Check if Analog Potentiometer should take precedence over digital
+  if (useDigital && isAlphaSignificant(analogVolume, prevAnalogVolume)) {
+    useDigital = false;
+    Serial.println("Master: ANALOG");
+  }
+
+  if (!useDigital) {
+    volume = analogVolume;
+    prevAnalogVolume = analogVolume;
+  } 
+  
   delay(50);
   Serial.println(volume);
   digitalPot->write(map(volume, 0, 1024, 0, 255));
@@ -85,6 +101,8 @@ void printConfiguration() {
   Serial.println("\n------------------------\n");
 }
 
+boolean isAlphaSignificant(int value, int prevValue) {
+  return value < prevValue - ANALOG_THRESHOLD || value > prevValue + ANALOG_THRESHOLD;
 }
 
 void blink(int pin) {
