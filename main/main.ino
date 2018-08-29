@@ -58,7 +58,8 @@ void setup() {
 
 void loop() {
   analogVolume = analogPot->read();
-  
+  const int modifier = getModifierFromCommand();
+
   // Check if Analog Potentiometer should take precedence over digital
   if (useDigital && isAlphaSignificant(analogVolume, prevAnalogVolume)) {
     useDigital = false;
@@ -69,13 +70,14 @@ void loop() {
     volume = analogVolume;
     prevAnalogVolume = analogVolume;
   } 
-  
-  const int modifier = getModifierFromCommand();
-  
+
   // Check if Digital should take precedence over analog
-  if (modifier != 0) {
+  if (!useDigital && modifier != 0) {
     useDigital = true;
     Serial.println("Master: DIGITAL");
+  }
+  
+  if (useDigital) {
     changeDigitalVolume(modifier);
   }
   
