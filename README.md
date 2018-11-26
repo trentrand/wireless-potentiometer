@@ -6,33 +6,17 @@ This repository contains the code and schematics for an Arduino-based wireless p
 
 Create this gadget to add wireless IR manipulation of a 100k ohm analog potentiometer. 
 
-## Todo
+## Project Breakdown
 
 ### Software
 
-* InfaredReceiver.ino needs the following:
-  * store last command and relay it when #FFFFFFFF repeat command is received
-
-* Status indicator leds?
-  * When the device needs a pairing, blink orange with triple pattern
-    * wait for up, then confirm, then down, then confirm
-    * button to reset pairing? see if bean has room...
-  * When the device receives a command, blink green
-
-* Make sure everything is documented
+* Pairing mode for pairing your infared controller's volume up/down commands to this gadget.
+* Persists paired commands to EEPROM for saving between reboots.
+* Maintains precedence between analog / digital operation
+ * Allows user to modify volume using both the analog potentiometer and/or an IR remote.
 
 ### Hardware
 
-* Document finalized Uno schematic
-
-* Create Lightblue Bean schematic based on Uno
-  * Adjust library as necessary
-  * _Can we match pins 1:1 or are we going to have device-dependent presets?_
-
-* Assemble Lightblue Bean circuit
-
-* Research powering Bean from speaker circuit
-
-* Create installation document
-
-* Enclose circuit in speaker housing
+* Arduino device 
+* MCP41100 digital potentiometer
+* 100k analog potentiometer
