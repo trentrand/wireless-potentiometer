@@ -12,8 +12,8 @@
 #define STEP_MODIFIER 20
 const int DIGITAL_POT_PIN = 10;
 const int ANALOG_POT_PIN = A5;
-const int RECEIVER_PIN = 3;
-const int LED_PIN= 5;
+const int RECEIVER_PIN = 6;
+const int LED_PIN = LED_BUILTIN;
 
 struct Config {
   Command volumeUpCode;
@@ -81,7 +81,7 @@ void loop() {
     changeDigitalVolume(modifier);
   }
   
-  // printVolume();
+  printVolume();
 
   delay(50);
   digitalPot->write(map(volume, 0, 1024, 0, 255));
